@@ -16,6 +16,11 @@ def check_eligibility(percentage):
     else:
         return "Shortage"
 
+def calculate_absent_days(total_days, attended_days):
+
+    absent_days = total_days - attended_days
+
+    return absent_days
 
 # Main program
 

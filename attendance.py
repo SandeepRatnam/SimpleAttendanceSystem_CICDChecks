@@ -12,9 +12,9 @@ def calculate_attendance(attended_days, total_days):
 def check_eligibility(percentage):
 
     if percentage >= 75:
-        return "Shortage"
-    else:
         return "Eligible"
+    else:
+        return "Shortage"
 
 
 # Main program

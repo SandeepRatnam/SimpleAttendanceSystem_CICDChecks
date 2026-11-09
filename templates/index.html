@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Attendance System</title>
+</head>
+
+<body>
+
+    <h1>Employee Attendance Management</h1>
+
+    <form action="/attendance" method="POST">
+
+        <label>Employee Name:</label>
+        <input type="text" name="employee_name" required>
+
+        <br><br>
+
+        <label>Total Working Days:</label>
+        <input type="number" name="total_days" required>
+
+        <br><br>
+
+        <label>Days Attended:</label>
+        <input type="number" name="attended_days" required>
+
+        <br><br>
+
+        <button type="submit">Calculate Attendance</button>
+
+    </form>
+
+</body>
+</html>

@@ -81,7 +81,9 @@ jobs:
         with:
           context: .
           push: true
-          tags: sandeepratnam343/employee-attendance:v1
+          tags: |
+            sandeepratnam343/employee-attendance:v2
+            sandeepratnam343/employee-attendance:latest
   # Job 4: Deploy application to Render
   deploy:
     runs-on: ubuntu-latest

@@ -1,6 +1,14 @@
+
+import os
 from flask import Flask, render_template, request
 
 app = Flask(__name__)
+
+# Read attendance threshold from environment variable
+# If it is not set, use 75 as the default value
+ATTENDANCE_THRESHOLD = int(
+    os.environ.get("ATTENDANCE_THRESHOLD", 75)
+)
 
 
 @app.route("/")
@@ -23,7 +31,8 @@ def calculate_attendance():
 
     percentage = (attended_days / total_days) * 100
 
-    if percentage >= 75:
+    # Compare attendance percentage with configured threshold
+    if percentage >= ATTENDANCE_THRESHOLD:
         status = "Eligible"
     else:
         status = "Shortage"
@@ -39,19 +48,16 @@ def calculate_attendance():
 
         <p>Attendance Percentage: {percentage:.2f}%</p>
 
+        <p>Required Attendance: {ATTENDANCE_THRESHOLD}%</p>
+
         <p>Attendance Status: {status}</p>
 
         <a href="/">Go Back</a>
     """
 
 
-import os
-
 if __name__ == "__main__":
+
     port = int(os.environ.get("PORT", 5000))
+
     app.run(host="0.0.0.0", port=port)
-
-
-# if __name__ == "__main__":
-
-    # app.run(host="0.0.0.0", port=5000)

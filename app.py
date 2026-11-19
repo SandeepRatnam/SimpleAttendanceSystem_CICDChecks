@@ -1,41 +1,66 @@
 
 import os
+import logging
+
 from flask import Flask, render_template, request
 
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s"
+)
+
+logger = logging.getLogger(__name__)
+
+# Create Flask application
 app = Flask(__name__)
 
 # Read attendance threshold from environment variable
-# If it is not set, use 75 as the default value
 ATTENDANCE_THRESHOLD = int(
     os.environ.get("ATTENDANCE_THRESHOLD", 75)
 )
 
 
+# Home page
 @app.route("/")
 def home():
+    logger.info("Home page accessed")
 
     return render_template("index.html")
 
 
+# Attendance calculation
 @app.route("/attendance", methods=["POST"])
 def calculate_attendance():
 
+    logger.info("Attendance calculation requested")
+
     employee_name = request.form["employee_name"]
-
     total_days = int(request.form["total_days"])
-
     attended_days = int(request.form["attended_days"])
 
+    # Validate attendance values
     if total_days <= 0 or attended_days < 0 or attended_days > total_days:
+
+        logger.warning("Invalid attendance values received")
+
         return "Invalid attendance values", 400
 
+    # Calculate attendance percentage
     percentage = (attended_days / total_days) * 100
 
-    # Compare attendance percentage with configured threshold
+    logger.info(
+        "Attendance calculated for employee: %s",
+        employee_name
+    )
+
+    # Check attendance eligibility
     if percentage >= ATTENDANCE_THRESHOLD:
         status = "Eligible"
     else:
         status = "Shortage"
+
+    logger.info("Attendance status: %s", status)
 
     return f"""
         <h1>Attendance Result</h1>
@@ -56,8 +81,11 @@ def calculate_attendance():
     """
 
 
+# Start Flask application
 if __name__ == "__main__":
 
     port = int(os.environ.get("PORT", 5000))
+
+    logger.info("Starting Employee Attendance Application")
 
     app.run(host="0.0.0.0", port=port)

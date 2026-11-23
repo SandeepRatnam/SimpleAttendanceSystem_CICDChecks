@@ -1,0 +1,28 @@
+
+name: Employee Attendance Monitoring
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+
+  workflow_dispatch:
+
+jobs:
+  availability-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check application availability
+        run: |
+          URL="https://employee-attendance-v1.onrender.com/health"
+
+          RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" "$URL")
+
+          echo "HTTP Status Code: $RESPONSE"
+
+          if [ "$RESPONSE" -eq 200 ]; then
+            echo "Application is AVAILABLE"
+          else
+            echo "Application is NOT AVAILABLE"
+            exit 1
+          fi

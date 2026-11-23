@@ -28,6 +28,16 @@ def home():
 
     return render_template("index.html")
 
+#Health check
+@app.route("/health")
+def health_check():
+
+    logger.info("Health check requested")
+
+    return {
+        "status": "healthy",
+        "application": "Employee Attendance System"
+    }, 200
 
 # Attendance calculation
 @app.route("/attendance", methods=["POST"])

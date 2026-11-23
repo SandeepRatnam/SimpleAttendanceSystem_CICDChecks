@@ -1,0 +1,11 @@
+2026-11-19 01:43:01,349 - INFO - Starting Employee Attendance Application
+2026-11-19 01:43:01,378 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.9:5000
+2026-11-19 01:43:01,378 - INFO - [33mPress CTRL+C to quit[0m
+2026-11-19 01:43:34,489 - INFO - Home page accessed
+2026-11-19 01:43:34,494 - INFO - 127.0.0.1 - - [19/Nov/2026 01:43:34] "GET / HTTP/1.1" 200 -
+2026-11-19 01:43:48,440 - INFO - Attendance calculation requested
+2026-11-19 01:43:48,441 - WARNING - Invalid attendance values received
+2026-11-19 01:43:48,441 - INFO - 127.0.0.1 - - [19/Nov/2026 01:43:48] "[31m[1mPOST /attendance HTTP/1.1[0m" 400 -
